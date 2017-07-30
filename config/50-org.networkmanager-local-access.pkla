@@ -1,0 +1,17 @@
+# This file should be put in /etc/polkit-1/localauthority/50-local.d/
+# This is required, otherwise the user heimdall will not be allowed
+# to add or modify system connections, and to connect to them.
+
+[Allow heimdall networkmanager modify connections]
+Identity=unix-group:heimdall
+Action=org.freedesktop.NetworkManager.settings.modify.system
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Allow heimdall networkmanager connect and disconnect]
+Identity=unix-group:heimdall
+Action=org.freedesktop.NetworkManager.network-control
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes

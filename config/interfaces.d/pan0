@@ -1,0 +1,6 @@
+auto pan0
+iface pan0 inet manual
+    bridge_fd 0
+    bridge_stp no
+    address 10.155.186.1
+    netmask 255.255.255.0

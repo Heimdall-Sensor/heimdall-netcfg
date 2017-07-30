@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Heimdall Configuration</title>
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/static/css/heimdall.css" type="text/css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                <a class="navbar-brand" href="#">Heimdall</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Wi-Fi</a></li>
+                        <li><a href="#about">Bluetooth</a></li>
+                        <li><a href="#contact">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+              <div class="starter-template">
+                <h1>Wi-Fi configuratie</h1>
+                <h2>Beschikbare netwerken</h2>
+                <p style="text-align: center;">
+                    <button type="button" id="refresh_nets">Vernieuwen</button>
+                </p>
+                <table id="networks" data-csrf="{% csrf_token %}">
+                    <thead>
+                        <tr>
+                            <th>*</th>
+                            <th>SSID</th>
+                            <th>BSSID</th>
+                            <th>Channel</th>
+                            <th>Strength</th> 
+                            <th>Type</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for network in networks %}
+                    <tr data-details="{{ network.json }}">
+                        <td><input type="radio" name="essid" value="{{ network.essid }}" {% if network.active %} checked="checked" {% endif %} /></td>
+                        <td class="essid">{{ network.essid }}</td>
+                        <td class="bssid">{{ network.bssid }}</td>
+                        <td class="channel">{{ network.channel }}</td>
+                        <td class="strength">{{ network.strength }}%</td>
+                        <td class="encryption">{{ network.encryption }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </ul>
+              </div>
+        </div>
+
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/heimdall.js"></script>
+        <script src="/static/js/jquery.bootstrap-growl.min.js"></script>
+    </body>
+</html>

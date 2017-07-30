@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source ~heimdall/code/ros/devel/setup.bash
+
+export ROS_MASTER_URI=http://localhost:11311/
+export ETH0_IP=`/sbin/ifconfig eth0 | grep inet | grep -v inet6 | grep -v inet6 | head -n 1 | awk '{print $2}' | cut -c 6-`
+export ROS_IP=$ETH0_IP
